@@ -1,0 +1,17 @@
+[build-system]
+build-backend = 'mesonpy'
+requires = ['meson-python', 'numpy']
+
+[project]
+name = 'mytestlib'
+version = '0.0.1'
+description = 'A test library for showing off meson build systems.'
+readme = 'README.md'
+requires-python = '>=3.8'
+license = {file = 'LICENSE.txt'}
+authors = [
+  {name = 'Bowsette Koopa', email = 'bowsette@example.com'},
+]
+dependencies = [
+  "numpy",
+]
