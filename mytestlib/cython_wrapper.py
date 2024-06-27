@@ -1,7 +1,7 @@
 import ctypes
 import os
 
-from mytestlib import testprojectcython
+from mytestlib import cyth_core
 
 def min_and_max(x: int, y: int):
-    return testprojectcython.min_and_max(x, y)
+    return cyth_core.min_and_max(x, y)

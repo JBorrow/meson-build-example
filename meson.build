@@ -75,7 +75,9 @@ c_helper_lib = shared_library(
 cython_sources = ['cython/cyth_core.pyx']
 
 py.extension_module(
-    'testprojectcython',
+    # Note that this MUST be the same name as the source file
+    # or you won't be able to import the extension.
+    'cyth_core',
     cython_sources,
     include_directories: ['cython'],
     dependencies: py_dep,
