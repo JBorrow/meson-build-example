@@ -46,12 +46,12 @@ inc_np = include_directories(incdir_numpy, incdir_f2py)
 
 fortran_pyed = custom_target(
     input: fortran_sources,
-    output: ['mytestlib_testprojectf90-f2pywrappers2.f90', 'mytestlib_testprojectf90module.c'],
-    command: [py, '-m', 'numpy.f2py', '@INPUT@', '-m', 'mytestlib_testprojectf90', '--lower']
+    output: ['testprojectf90-f2pywrappers2.f90', 'testprojectf90module.c'],
+    command: [py, '-m', 'numpy.f2py', '@INPUT@', '-m', 'testprojectf90', '--lower']
 )
 
 py.extension_module(
-    'mytestlib_testprojectf90',
+    'testprojectf90',
     ['fortran/addition.f90', fortran_pyed],
     incdir_f2py / 'fortranobject.c',
     include_directories: inc_np,
@@ -66,7 +66,7 @@ py.extension_module(
 c_helper_sources = ['cython/core.c']
 
 c_helper_lib = shared_library(
-    'mytestlib_testprojectsharedlibcython',
+    'testprojectsharedlibcython',
     c_helper_sources,
     install: true,
     install_dir: py.get_install_dir() / 'mytestlib'
@@ -75,7 +75,7 @@ c_helper_lib = shared_library(
 cython_sources = ['cython/cyth_core.pyx']
 
 py.extension_module(
-    'mytestlib_testprojectcython',
+    'testprojectcython',
     cython_sources,
     include_directories: ['cython'],
     dependencies: py_dep,
