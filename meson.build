@@ -1,4 +1,4 @@
-project('mytestlib', ['c', 'fortran'])
+project('mytestlib', ['c', 'fortran', 'cython'])
 
 py = import('python').find_installation(pure: false)
 
@@ -6,6 +6,7 @@ python_sources = [
     'mytestlib/__init__.py',
     'mytestlib/c_wrapper.py',
     'mytestlib/fortran_wrapper.py',
+    'mytestlib/cython_wrapper.py',
 ]
 
 # Python is _very_ simple!
@@ -55,5 +56,30 @@ py.extension_module(
     incdir_f2py / 'fortranobject.c',
     include_directories: inc_np,
     dependencies: py_dep,
-    install: true
+    install: true,
+    install_dir: py.get_install_dir() / 'mytestlib'
+)
+
+# Cython
+
+# Need to build helper libraries separately and link them in.
+c_helper_sources = ['cython/core.c']
+
+c_helper_lib = shared_library(
+    'mytestlib_testprojectsharedlibcython',
+    c_helper_sources,
+    install: true,
+    install_dir: py.get_install_dir() / 'mytestlib'
+)
+
+cython_sources = ['cython/cyth_core.pyx']
+
+py.extension_module(
+    'mytestlib_testprojectcython',
+    cython_sources,
+    include_directories: ['cython'],
+    dependencies: py_dep,
+    link_with: [c_helper_lib],
+    install: true,
+    install_dir: py.get_install_dir() / 'mytestlib'
 )

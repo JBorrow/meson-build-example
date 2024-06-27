@@ -1,6 +1,6 @@
 [build-system]
 build-backend = 'mesonpy'
-requires = ['meson-python', 'numpy']
+requires = ['meson-python', 'numpy', 'cython']
 
 [project]
 name = 'mytestlib'
@@ -13,5 +13,6 @@ authors = [
   {name = 'Bowsette Koopa', email = 'bowsette@example.com'},
 ]
 dependencies = [
-  "numpy",
+  'numpy',
+  'cython',
 ]
